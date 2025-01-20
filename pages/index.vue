@@ -17,6 +17,8 @@
                     severity="secondary"
                     size="large"
                     class="px-10"
+                    as="router-link"
+                    to="/shop"
                 />
             </div>
         </div>
@@ -25,6 +27,13 @@
             class="container mx-auto max-w-[1840px] px-4 md:px-0 lg:px-0 xl:px-0 2xl:px-0"
         >
             <NewArrivals />
+        </div>
+
+        <div>
+            <img
+                src="/assets/png/bg.png"
+                class="object-cover w-full h-[52rem]"
+            />
         </div>
     </div>
 </template>
