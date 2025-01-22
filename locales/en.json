@@ -1,11 +1,25 @@
 {
     "currency": "zł",
+
     "shop": "Shop",
     "shop_name": "MG",
+
     "basket": "Basket",
+
+    "language_selector": "Select language",
+    "language_pl": "Polish",
+    "language_en": "English",
+    "language_success_summary": "Change language",
+    "language_success_detail": "Language changed successfully to {lang}",
+
     "new_arrivals": "New Arrivals",
-    "check_all": "Check all",
+    "view_all": "View all",
     "out_of_stock": "Out of Stock",
+
+    "hoodies": "Hoodies",
+    "tees": "T-shirts",
+
     "terms_and_conditions": "Terms and conditions",
-    "privacy_policy": "Privacy policy"
+    "privacy_policy": "Privacy policy",
+    "all_rights_reserved": "All rights reserved"
 }

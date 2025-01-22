@@ -24,16 +24,6 @@ const responsiveOptions = ref([
         numScroll: 1,
     },
 ])
-
-const getSeverity = (status: string) => {
-    switch (status) {
-        case 'out_of_stock':
-            return 'secondary'
-
-        default:
-            return undefined
-    }
-}
 </script>
 
 <template>
@@ -54,19 +44,24 @@ const getSeverity = (status: string) => {
                         'ml-3': slotProps.index === products.length - 1,
                         'mr-3': slotProps.index === 0,
                     }"
+                    class="cursor-pointer group"
                 >
                     <div class="mb-3">
-                        <div class="relative mx-auto">
+                        <div
+                            class="relative mx-auto overflow-hidden bg-light-gray"
+                        >
                             <img
                                 src="https://i.imgur.com/5lX95H5.png"
                                 :alt="slotProps.data.name"
-                                class="w-full h-[32rem]"
+                                class="w-full h-[32rem] transform transition-transform duration-300 ease-in-out group-hover:scale-90"
                             />
 
                             <Tag
                                 :value="$t(slotProps.data.inventoryStatus)"
                                 :severity="
-                                    getSeverity(slotProps.data.inventoryStatus)
+                                    getStockSeverity(
+                                        slotProps.data.inventoryStatus
+                                    )
                                 "
                                 class="absolute"
                                 style="left: 5px; top: 5px"

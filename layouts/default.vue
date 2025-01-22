@@ -1,5 +1,7 @@
 <template>
     <div>
+        <Toast />
+
         <AppHeader />
         <slot />
         <AppFooter />

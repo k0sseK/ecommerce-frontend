@@ -1,11 +1,25 @@
 {
     "currency": "zł",
+
     "shop": "Sklep",
     "shop_name": "MG",
+
     "basket": "Koszyk",
+
+    "language_selector": "Wybór języka",
+    "language_pl": "Polski",
+    "language_en": "Angielski",
+    "language_success_summary": "Zmiana języka",
+    "language_success_detail": "Pomyślnie zmieniono język na {lang}",
+
     "new_arrivals": "Nowości",
-    "check_all": "Zobacz wszystko",
+    "view_all": "Zobacz wszystko",
     "out_of_stock": "Wyprzedane",
+
+    "hoodies": "Bluzy",
+    "tees": "Koszulki",
+
     "terms_and_conditions": "Regulamin",
-    "privacy_policy": "Polityka prywatności"
+    "privacy_policy": "Polityka prywatności",
+    "all_rights_reserved": "Wszelkie prawa zastrzeżone"
 }
