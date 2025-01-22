@@ -9,7 +9,11 @@ export default {
         './error.vue',
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                'light-gray': '#e0e1e1',
+            },
+        },
     },
     plugins: [require('tailwindcss-primeui')],
 }
