@@ -1,9 +1,8 @@
-<script setup lang="ts">
-const route = useRoute()
-</script>
-
 <template>
-    <header class="absolute top-0 w-full z-20">
+    <header
+        class="absolute top-0 w-full z-20"
+        :class="{ 'border-b border-light-gray': $route.name !== 'index' }"
+    >
         <div
             class="container mx-auto max-w-[1840px] flex flex-row items-center justify-between h-20"
         >
@@ -11,7 +10,7 @@ const route = useRoute()
                 <span
                     class="uppercase cursor-pointer hover:underline"
                     @click="navigateTo('/shop')"
-                    v-if="route.name === 'product-id'"
+                    v-if="$route.name === 'product-id'"
                 >
                     {{ $t('shop') }}
                 </span>
@@ -26,7 +25,7 @@ const route = useRoute()
             </div>
             <div class="w-20 flex flex-row items-center gap-3">
                 <LanguageSelector />
-                <BasketDrawer />
+                <CartDrawer />
             </div>
         </div>
     </header>

@@ -4,7 +4,10 @@
     "shop": "Shop",
     "shop_name": "MG",
 
-    "basket": "Basket",
+    "cart": "Cart",
+    "cart_empty": "Cart is empty",
+    "cart_size": "Size",
+    "cart_check_out": "Check out",
 
     "language_selector": "Select language",
     "language_pl": "Polish",
@@ -22,7 +25,7 @@
 
     "product_description": "Description",
     "product_size_chart": "Size chart",
-    "add_to_basket": "Add to basket",
+    "add_to_cart": "Add to cart",
 
     "terms_and_conditions": "Terms and conditions",
     "privacy_policy": "Privacy policy",
