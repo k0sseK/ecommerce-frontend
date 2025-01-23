@@ -22,10 +22,47 @@ const scrollToImage = (index: number) => {
         })
     }
 }
+
+let observer: IntersectionObserver | null = null
+
+const observeImages = () => {
+    if (observer) observer.disconnect()
+
+    observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const index = imageRefs.value.findIndex(
+                        (el) => el === entry.target
+                    )
+                    if (index !== -1 && selectedImage.value !== index) {
+                        selectedImage.value = index
+                    }
+                }
+            })
+        },
+        {
+            root: null,
+            threshold: 0.5,
+        }
+    )
+
+    imageRefs.value.forEach((image) => {
+        if (image && observer) observer.observe(image)
+    })
+}
+
+onMounted(() => {
+    observeImages()
+})
+
+onBeforeUnmount(() => {
+    if (observer) observer.disconnect()
+})
 </script>
 
 <template>
-    <div class="border-t border-light-gray mt-20">
+    <div class="mt-20">
         <div class="px-4 md:px-0 lg:px-0 xl:px-0 2xl:px-0">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div class="lg:col-span-7">
@@ -61,7 +98,7 @@ const scrollToImage = (index: number) => {
                             <h1 class="text-3xl font-semibold uppercase">
                                 BAMBOO WATCH
                             </h1>
-                            <p>{{ $t('currency') }}199.99</p>
+                            <p>199.99 {{ $t('currency') }}</p>
                         </div>
 
                         <Divider />
@@ -74,7 +111,7 @@ const scrollToImage = (index: number) => {
                                 <ProductAccordion />
 
                                 <Button
-                                    :label="$t('add_to_basket')"
+                                    :label="$t('add_to_cart')"
                                     severity="secondary"
                                     class="w-full py-3"
                                 />
