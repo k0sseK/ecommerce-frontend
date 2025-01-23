@@ -16,10 +16,18 @@
     "view_all": "View all",
     "out_of_stock": "Out of Stock",
 
+    "all": "all",
     "hoodies": "Hoodies",
     "tees": "T-shirts",
 
+    "product_description": "Description",
+    "product_size_chart": "Size chart",
+    "add_to_basket": "Add to basket",
+
     "terms_and_conditions": "Terms and conditions",
     "privacy_policy": "Privacy policy",
-    "all_rights_reserved": "All rights reserved"
+    "all_rights_reserved": "All rights reserved",
+
+    "not_found": "Not found",
+    "back_to_home": "Back to home"
 }

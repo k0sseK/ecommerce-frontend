@@ -45,6 +45,12 @@ const responsiveOptions = ref([
                         'mr-3': slotProps.index === 0,
                     }"
                     class="cursor-pointer group"
+                    @click="
+                        navigateTo({
+                            name: 'product-id',
+                            params: { id: slotProps.data.id },
+                        })
+                    "
                 >
                     <div class="mb-3">
                         <div

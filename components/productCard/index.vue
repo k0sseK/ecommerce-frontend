@@ -3,7 +3,10 @@ defineProps(['product'])
 </script>
 
 <template>
-    <div class="flex flex-col justify-center cursor-pointer group">
+    <div
+        class="flex flex-col justify-center cursor-pointer group"
+        @click="navigateTo({ name: 'product-id', params: { id: product.id } })"
+    >
         <div class="relative mx-auto mb-3 w-full overflow-hidden bg-light-gray">
             <img
                 src="https://i.imgur.com/5lX95H5.png"

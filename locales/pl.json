@@ -16,10 +16,18 @@
     "view_all": "Zobacz wszystko",
     "out_of_stock": "Wyprzedane",
 
+    "all": "Wszystko",
     "hoodies": "Bluzy",
     "tees": "Koszulki",
 
+    "product_description": "Opis",
+    "product_size_chart": "Tabela rozmiarów",
+    "add_to_basket": "Dodaj do koszyka",
+
     "terms_and_conditions": "Regulamin",
     "privacy_policy": "Polityka prywatności",
-    "all_rights_reserved": "Wszelkie prawa zastrzeżone"
+    "all_rights_reserved": "Wszelkie prawa zastrzeżone",
+
+    "not_found": "Nie znaleziono strony",
+    "back_to_home": "Wróć na stronę główną"
 }
