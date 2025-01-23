@@ -11,7 +11,7 @@ defineProps(['product'])
             <img
                 src="https://i.imgur.com/5lX95H5.png"
                 :alt="product.name"
-                class="w-full h-[32rem] transform transition-transform duration-300 ease-in-out group-hover:scale-90"
+                class="w-full transform transition-transform duration-300 ease-in-out group-hover:scale-90"
             />
 
             <Tag
@@ -27,7 +27,7 @@ defineProps(['product'])
             <span class="font-light uppercase">
                 {{ product.name }}
             </span>
-            <span>{{ $t('currency') }}{{ product.price }}</span>
+            <span>{{ product.price }} {{ $t('currency') }}</span>
         </div>
     </div>
 </template>

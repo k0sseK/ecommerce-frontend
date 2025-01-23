@@ -84,7 +84,7 @@ const responsiveOptions = ref([
                             {{ slotProps.data.name }}
                         </span>
                         <span>
-                            {{ $t('currency') }}{{ slotProps.data.price }}
+                            {{ slotProps.data.price }} {{ $t('currency') }}
                         </span>
                     </div>
                 </div>
@@ -94,7 +94,7 @@ const responsiveOptions = ref([
 </template>
 
 <style scoped>
-::v-deep(.p-carousel-indicator-active) {
+:deep(.p-carousel-indicator-active) {
     button {
         background-color: white;
         border: none;

@@ -45,15 +45,15 @@
 </template>
 
 <style scoped>
-::v-deep(.p-accordionpanel:last-child) {
+:deep(.p-accordionpanel:last-child) {
     border: none;
 }
 
-::v-deep(.p-accordionheader) {
+:deep(.p-accordionheader) {
     background: transparent;
 }
 
-::v-deep(.p-accordioncontent-content) {
+:deep(.p-accordioncontent-content) {
     background: transparent;
 }
 </style>

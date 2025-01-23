@@ -11,7 +11,7 @@ const products = ref(productsMockdata)
         <div
             class="container mx-auto max-w-[1840px] px-4 md:px-0 lg:px-0 xl:px-0 2xl:px-0 mb-8"
         >
-            <div class="grid grid-flow-row grid-cols-4 gap-6">
+            <div class="grid grid-flow-row grid-cols-2 md:grid-cols-4 gap-6">
                 <ProductCard
                     v-for="product in products"
                     :key="product.id"
