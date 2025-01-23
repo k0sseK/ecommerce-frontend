@@ -3,7 +3,9 @@
         <div
             class="container mx-auto max-w-[1840px] flex flex-row items-center justify-center py-7"
         >
-            <div class="flex flex-row items-center">
+            <div
+                class="w-full flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0"
+            >
                 <div
                     class="flex flex-row items-center justify-center gap-2 w-96"
                 >
