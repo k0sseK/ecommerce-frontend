@@ -11,7 +11,15 @@ const visible = ref<boolean>(false)
 
 const navigateToCart = () => {
     visible.value = false
-    navigateTo('cart')
+    navigateTo({ name: 'cart' })
+}
+
+const navigateToProduct = (productId: number) => {
+    visible.value = false
+    navigateTo({
+        name: 'product-id',
+        params: { id: productId },
+    })
 }
 </script>
 
@@ -42,6 +50,7 @@ const navigateToCart = () => {
                         <div class="flex flex-col gap-2 w-full">
                             <h1
                                 class="uppercase cursor-pointer hover:underline"
+                                @click="navigateToProduct(item.id)"
                             >
                                 {{ item.name }}
                             </h1>
@@ -82,7 +91,7 @@ const navigateToCart = () => {
                                     class="text-xs items-end cursor-pointer hover:underline"
                                     @click="removeFromCart(item.id)"
                                 >
-                                    Usuń
+                                    {{ $t('cart_remove') }}
                                 </span>
                             </div>
                         </div>
@@ -98,6 +107,7 @@ const navigateToCart = () => {
                     :label="`${$t('cart_check_out')} ${totalPrice} ${$t(
                         'currency'
                     )}`"
+                    :disabled="totalItems === 0"
                     severity="secondary"
                     class="w-full py-3"
                     @click="navigateToCart"
@@ -115,5 +125,9 @@ const navigateToCart = () => {
 :deep(.p-inputnumber-input) {
     text-align: center;
     width: 2.75rem;
+}
+
+:deep(.p-inputtext:enabled:focus) {
+    border-color: #e0e1e1;
 }
 </style>

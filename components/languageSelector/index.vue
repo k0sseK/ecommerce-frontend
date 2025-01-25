@@ -30,7 +30,7 @@ const changeLanguage = (lang: string) => {
         severity: 'secondary',
         summary: t('language_success_summary'),
         detail: t('language_success_detail', { lang: t(`language_${lang}`) }),
-        life: 2000,
+        life: 2500,
     })
 }
 </script>
