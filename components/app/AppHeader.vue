@@ -10,7 +10,9 @@
                 <span
                     class="uppercase cursor-pointer hover:underline"
                     @click="navigateTo('/shop')"
-                    v-if="$route.name === 'product-id'"
+                    v-if="
+                        $route.name === 'product-id' || $route.name === 'cart'
+                    "
                 >
                     {{ $t('shop') }}
                 </span>
