@@ -2,7 +2,9 @@
     "currency": "zł",
 
     "shop": "Shop",
-    "shop_name": "MG",
+    "shop_name": "HUSTWEAR",
+    "shop_description": "Clothing brand",
+    "shop_no_data": "No data",
 
     "cart": "Cart",
     "cart_empty": "Cart is empty",
@@ -15,6 +17,16 @@
     "cart_tax_included": "(tax incl.)",
     "cart_check_out": "Check out",
     "cart_order": "Go to order",
+
+    "order_contact": "Contact",
+    "order_delivery": "Delivery",
+    "order_delivery_method": "Delivery Method",
+    "order_select_parcel_locker": "Select parcel locker",
+    "order_shopping_cart": "Shopping Cart",
+    "order_total": "Total",
+    "order_tax_included": "(tax incl.)",
+    "order_payment_method": "Payment Method",
+    "order_pay": "Place order",
 
     "order_form_email": "E-mail",
     "order_form_firstname": "First Name",
@@ -35,9 +47,11 @@
     "view_all": "View all",
     "out_of_stock": "Out of Stock",
 
-    "all": "all",
-    "hoodies": "Hoodies",
-    "tees": "T-shirts",
+    "category_all": "All",
+    "category_hoodies": "Hoodies",
+    "category_tees": "T-Shirts",
+    "category_pants": "Pants",
+    "category_accessories": "Accessories",
 
     "product_description": "Description",
     "product_size_chart": "Size chart",

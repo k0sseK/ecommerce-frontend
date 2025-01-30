@@ -18,7 +18,7 @@
                     size="large"
                     class="px-10"
                     as="router-link"
-                    to="/shop"
+                    to="/shop/all"
                 />
             </div>
         </div>

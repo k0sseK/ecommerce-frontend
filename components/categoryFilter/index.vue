@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const categories = ref(['all', 'hoodies', 'tees'])
+import { categories } from '@/config/categories'
 </script>
 
 <template>
@@ -8,8 +8,11 @@ const categories = ref(['all', 'hoodies', 'tees'])
             <span
                 v-for="category in categories"
                 class="text-md uppercase cursor-pointer hover:underline w-24 text-center"
+                @click="
+                    navigateTo({ name: 'shop-category', params: { category } })
+                "
             >
-                {{ $t(category) }}
+                {{ $t(`category_${category}`) }}
             </span>
         </div>
     </div>

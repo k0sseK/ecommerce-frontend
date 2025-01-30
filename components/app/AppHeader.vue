@@ -9,7 +9,7 @@
             <div class="w-20">
                 <span
                     class="uppercase cursor-pointer hover:underline"
-                    @click="navigateTo('/shop')"
+                    @click="navigateTo('/shop/all')"
                     v-if="
                         $route.name === 'product-id' || $route.name === 'cart'
                     "
@@ -19,7 +19,7 @@
             </div>
             <div class="w-33 text-center">
                 <h1
-                    class="text-4xl font-medium tracking-wide cursor-pointer"
+                    class="text-4xl font-bold tracking-wide cursor-pointer"
                     @click="navigateTo('/')"
                 >
                     {{ $t('shop_name') }}

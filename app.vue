@@ -1,9 +1,11 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 useSeoMeta({
-    title: 'MG',
-    ogTitle: 'MG',
-    description: 'MG Store',
-    ogDescription: 'MG Store',
+    title: t('shop_name'),
+    ogTitle: t('shop_name'),
+    description: t('shop_description'),
+    ogDescription: t('shop_description'),
     ogImage: 'https://example.com/image.png',
     twitterCard: 'summary_large_image',
 })

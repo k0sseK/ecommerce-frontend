@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import productsMockdata from '@/mockdata/products.json'
+import { useProductStore } from '@/stores/product'
+import { storeToRefs } from 'pinia'
 
-const products = ref(productsMockdata)
+const productStore = useProductStore()
+
+const { lastProducts } = storeToRefs(productStore)
+const { fetchLastProducts } = productStore
+
 const responsiveOptions = ref([
     {
         breakpoint: '1400px',
@@ -24,31 +29,36 @@ const responsiveOptions = ref([
         numScroll: 1,
     },
 ])
+
+onMounted(() => {
+    fetchLastProducts()
+})
 </script>
 
 <template>
     <div>
         <Carousel
-            :value="products"
+            :value="lastProducts"
             :numVisible="4"
             :numScroll="1"
             :responsiveOptions="responsiveOptions"
             :showNavigators="false"
+            containerClass="flex items-center"
         >
             <template #item="slotProps">
                 <div
                     :class="{
                         'mx-3':
                             slotProps.index !== 0 &&
-                            slotProps.index !== products.length - 1,
-                        'ml-3': slotProps.index === products.length - 1,
+                            slotProps.index !== lastProducts.length - 1,
+                        'ml-3': slotProps.index === lastProducts.length - 1,
                         'mr-3': slotProps.index === 0,
                     }"
                     class="cursor-pointer group"
                     @click="
                         navigateTo({
                             name: 'product-id',
-                            params: { id: slotProps.data.id },
+                            params: { id: slotProps.data._id },
                         })
                     "
                 >
@@ -59,22 +69,19 @@ const responsiveOptions = ref([
                             <img
                                 src="https://i.imgur.com/5lX95H5.png"
                                 :alt="slotProps.data.name"
-                                class="w-full h-[32rem] transform transition-transform duration-300 ease-in-out group-hover:scale-90"
+                                class="w-[full] h-[32rem] transform transition-transform duration-300 ease-in-out group-hover:scale-90"
                             />
 
                             <Tag
-                                :value="$t(slotProps.data.inventoryStatus)"
+                                :value="$t('out_of_stock')"
                                 :severity="
-                                    getStockSeverity(
-                                        slotProps.data.inventoryStatus
-                                    )
+                                    isOutOfStock(slotProps.data.quantity)
+                                        ? 'secondary'
+                                        : undefined
                                 "
                                 class="absolute"
                                 style="left: 5px; top: 5px"
-                                v-if="
-                                    slotProps.data.inventoryStatus ===
-                                    'out_of_stock'
-                                "
+                                v-if="isOutOfStock(slotProps.data.quantity)"
                             />
                         </div>
                     </div>
@@ -99,5 +106,10 @@ const responsiveOptions = ref([
         background-color: white;
         border: none;
     }
+}
+
+.carousel-item {
+    flex-shrink: 0; /* Ensure each item doesn't shrink */
+    width: auto; /* Let items take their natural width */
 }
 </style>

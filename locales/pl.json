@@ -2,7 +2,9 @@
     "currency": "zł",
 
     "shop": "Sklep",
-    "shop_name": "MG",
+    "shop_name": "HUSTWEAR",
+    "shop_description": "Sklep z ubraniami",
+    "shop_no_data": "Brak asortymentu",
 
     "cart": "Koszyk",
     "cart_empty": "Koszyk jest pusty",
@@ -12,9 +14,20 @@
     "cart_continue_shopping": "Kontynuuj zakupy",
     "cart_coupon_code": "Kod rabatowy",
     "cart_total": "Łącznie",
-    "cart_tax_included": "(tax incl.)",
+    "cart_tax_included": "(w tym podatek)",
     "cart_check_out": "Zobacz koszyk",
     "cart_order": "Przejdź do płatności",
+
+    "order_contact": "Kontakt",
+    "order_delivery": "Dostawa",
+    "order_delivery_method": "Metoda wysyłki",
+    "order_select_parcel_locker": "Wybierz paczkomat",
+    "order_shopping_cart": "Koszyk",
+    "order_subtotal": "Suma częściowa",
+    "order_total": "Suma",
+    "order_tax_included": "(w tym podatek)",
+    "order_payment_method": "Metoda płatności",
+    "order_pay": "Zapłać",
 
     "order_form_email": "E-mail",
     "order_form_firstname": "Imię",
@@ -35,9 +48,11 @@
     "view_all": "Zobacz wszystko",
     "out_of_stock": "Wyprzedane",
 
-    "all": "Wszystko",
-    "hoodies": "Bluzy",
-    "tees": "Koszulki",
+    "category_all": "Wszystko",
+    "category_hoodies": "Bluzy",
+    "category_tees": "Koszulki",
+    "category_pants": "Spodnie",
+    "category_accessories": "Akcesoria",
 
     "product_description": "Opis",
     "product_size_chart": "Tabela rozmiarów",

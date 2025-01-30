@@ -4,7 +4,7 @@
             <h1 class="text-2xl uppercase">{{ $t('new_arrivals') }}</h1>
             <p
                 class="text-xs uppercase underline cursor-pointer"
-                @click="navigateTo('/shop')"
+                @click="navigateTo('/shop/all')"
             >
                 {{ $t('view_all') }}
             </p>

@@ -5,7 +5,7 @@ defineProps(['product'])
 <template>
     <div
         class="flex flex-col justify-center cursor-pointer group"
-        @click="navigateTo({ name: 'product-id', params: { id: product.id } })"
+        @click="navigateTo({ name: 'product-id', params: { id: product._id } })"
     >
         <div class="relative mx-auto mb-3 w-full overflow-hidden bg-light-gray">
             <img
@@ -15,11 +15,13 @@ defineProps(['product'])
             />
 
             <Tag
-                :value="$t(product.inventoryStatus)"
-                :severity="getStockSeverity(product.inventoryStatus)"
+                :value="$t('out_of_stock')"
+                :severity="
+                    isOutOfStock(product.quantity) ? 'secondary' : undefined
+                "
                 class="absolute"
                 style="left: 5px; top: 5px"
-                v-if="product.inventoryStatus === 'out_of_stock'"
+                v-if="isOutOfStock(product.quantity)"
             />
         </div>
 

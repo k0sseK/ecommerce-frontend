@@ -16,7 +16,20 @@
                     <i
                         class="pi pi-instagram text-xl cursor-pointer"
                         @click="
-                            navigateTo('https://www.instagram.com/', {
+                            navigateTo(
+                                'https://www.instagram.com/hustwear.pl',
+                                {
+                                    open: {
+                                        target: '_blank',
+                                    },
+                                }
+                            )
+                        "
+                    ></i>
+                    <i
+                        class="pi pi-tiktok text-xl cursor-pointer"
+                        @click="
+                            navigateTo('https://www.tiktok.com/@hustwear', {
                                 open: {
                                     target: '_blank',
                                 },
