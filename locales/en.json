@@ -6,6 +6,15 @@
     "shop_description": "Clothing brand",
     "shop_no_data": "No data",
 
+    "language_selector": "Wybór języka",
+    "language_pl": "Polski",
+    "language_en": "Angielski",
+    "language_success_summary": "Zmiana języka",
+    "language_success_detail": "Pomyślnie zmieniono język na {lang}",
+
+    "product_size_out_of_stock": "Size out of stock",
+    "product_added_to_cart": "Added to cart",
+
     "cart": "Cart",
     "cart_empty": "Cart is empty",
     "cart_size": "Size",
@@ -36,12 +45,6 @@
     "order_form_city": "City",
     "order_form_phone_number": "Phone Number",
     "order_form_phone_number_tooltip": "In case you contact us regarding your order",
-
-    "language_selector": "Select language",
-    "language_pl": "Polish",
-    "language_en": "English",
-    "language_success_summary": "Change language",
-    "language_success_detail": "Language changed successfully to {lang}",
 
     "new_arrivals": "New Arrivals",
     "view_all": "View all",

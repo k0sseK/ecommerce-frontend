@@ -9,18 +9,17 @@ const productStore = useProductStore()
 const { products } = storeToRefs(productStore)
 const { fetchProducts } = productStore
 
-const router = useRouter()
 const route = useRoute()
-
 const loading = ref<boolean>(true)
 
 onMounted(() => {
     const category = route.params.category || 'all'
 
     if (!categories.includes(category as Category)) {
-        router.push({ name: 'shop-category', params: { category: 'all' } })
+        navigateTo({ name: 'shop-category', params: { category: 'all' } })
     } else {
         fetchProducts(category as Category).finally(() => {
+            console.log('final pozdro')
             loading.value = false
         })
     }
@@ -34,13 +33,7 @@ onMounted(() => {
         <div
             class="container mx-auto max-w-[1840px] px-4 md:px-0 lg:px-0 xl:px-0 2xl:px-0 mb-8"
         >
-            <div v-if="loading" class="flex justify-center items-center py-12">
-                <ProgressSpinner
-                    style="width: 50px; height: 50px"
-                    strokeWidth="3"
-                    animationDuration=".5s"
-                />
-            </div>
+            <Loading v-if="loading" />
 
             <template v-else>
                 <div

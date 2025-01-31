@@ -9,10 +9,9 @@ export const useProductStore = defineStore('product', () => {
         const { $axios } = useNuxtApp()
         try {
             const response = await $axios.get(
-                category === 'all' ? '/products' : '/products/category',
-                {
-                    params: { category: category.toUpperCase() },
-                }
+                category === 'all'
+                    ? '/products'
+                    : `/products/category/${category.toUpperCase()}`
             )
             products.value = response.data
         } catch (error) {
@@ -32,6 +31,16 @@ export const useProductStore = defineStore('product', () => {
         }
     }
 
+    const fetchProductById = async (productId: string) => {
+        const { $axios } = useNuxtApp()
+        try {
+            const response = await $axios.get(`/products/${productId}`)
+            return response.data
+        } catch (error) {
+            console.error('Error fetching product by id:', error)
+        }
+    }
+
     const addProduct = async (productData: any) => {
         const { $axios } = useNuxtApp()
         try {
@@ -46,6 +55,7 @@ export const useProductStore = defineStore('product', () => {
         lastProducts,
         fetchProducts,
         fetchLastProducts,
+        fetchProductById,
         addProduct,
     }
 })
