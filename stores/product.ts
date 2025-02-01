@@ -2,11 +2,12 @@ import { defineStore } from 'pinia'
 import type { Category } from '@/types/category'
 
 export const useProductStore = defineStore('product', () => {
+    const { $axios } = useNuxtApp()
+
     const products = ref<any[]>([])
     const lastProducts = ref<any[]>([])
 
     const fetchProducts = async (category: Category = 'all') => {
-        const { $axios } = useNuxtApp()
         try {
             const response = await $axios.get(
                 category === 'all'
@@ -20,7 +21,6 @@ export const useProductStore = defineStore('product', () => {
     }
 
     const fetchLastProducts = async (limit: number = 12) => {
-        const { $axios } = useNuxtApp()
         try {
             const response = await $axios.get('/products/last', {
                 params: { limit },
@@ -32,7 +32,6 @@ export const useProductStore = defineStore('product', () => {
     }
 
     const fetchProductById = async (productId: string) => {
-        const { $axios } = useNuxtApp()
         try {
             const response = await $axios.get(`/products/${productId}`)
             return response.data
@@ -42,7 +41,6 @@ export const useProductStore = defineStore('product', () => {
     }
 
     const addProduct = async (productData: any) => {
-        const { $axios } = useNuxtApp()
         try {
             await $axios.post('/products', productData)
         } catch (error) {

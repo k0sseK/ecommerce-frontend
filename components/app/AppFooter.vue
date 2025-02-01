@@ -1,8 +1,5 @@
 <template>
-    <footer
-        class="bg-zinc-800"
-        :class="{ 'absolute bottom-0 w-full': $route.name === 'cart' }"
-    >
+    <footer class="bg-zinc-800">
         <div
             class="container mx-auto max-w-[1840px] flex flex-row items-center justify-center py-7"
         >

@@ -232,9 +232,9 @@ const navigateToProduct = (productId: number) => {
                                 </p>
                                 <p>
                                     {{
-                                        `${totalPrice + getDeliveryPrice} ${$t(
-                                            'currency'
-                                        )}`
+                                        `${(
+                                            totalPrice + getDeliveryPrice
+                                        ).toFixed(2)} ${$t('currency')}`
                                     }}
                                 </p>
                             </div>

@@ -19,7 +19,6 @@ onMounted(() => {
         navigateTo({ name: 'shop-category', params: { category: 'all' } })
     } else {
         fetchProducts(category as Category).finally(() => {
-            console.log('final pozdro')
             loading.value = false
         })
     }

@@ -2,49 +2,98 @@ import { defineStore } from 'pinia'
 import type { CartItem } from '~/types/cart'
 
 export const useCartStore = defineStore('cart', () => {
-    const items = ref<CartItem[]>([
-        {
-            id: 1,
-            name: 'Bamboo Watch',
-            size: 'M',
-            image: 'https://i.imgur.com/5lX95H5.png',
-            price: 199.99,
-            quantity: 5,
-        },
-        {
-            id: 2,
-            name: 'Bamboo Watch',
-            size: 'S',
-            image: 'https://i.imgur.com/5lX95H5.png',
-            price: 99.99,
-            quantity: 2,
-        },
-    ])
+    const { $axios } = useNuxtApp()
+
+    const cartId = ref<string | null>(null)
+    const items = ref<CartItem[]>([])
 
     const totalItems = computed(() => items.value.length)
+    const totalPrice = computed(() =>
+        parseFloat(
+            items.value
+                .reduce((total, item) => total + item.price * item.quantity, 0)
+                .toFixed(2)
+        )
+    )
 
-    const totalPrice = computed(() => {
-        if (items.value.length === 0) {
-            return 0
+    const fetchCart = async () => {
+        if (!cartId.value) return
+
+        try {
+            const response = await $axios.get(`/cart/${cartId.value}`)
+            items.value = response.data.items || []
+        } catch (error) {
+            console.error('Błąd pobierania koszyka:', error)
         }
+    }
 
-        return items.value.reduce((total, item) => {
-            return total + item.price * item.quantity
-        }, 0)
+    const addToCart = async (item: CartItem) => {
+        try {
+            const response = await $axios.post(`/cart/${cartId.value}`, item)
+            items.value = response.data.items
+        } catch (error) {
+            console.error('Błąd dodawania do koszyka:', error)
+        }
+    }
+
+    const updateCartItemQuantity = async (
+        itemId: string,
+        sku: string,
+        quantity: number
+    ) => {
+        try {
+            const response = await $axios.put(
+                `/cart/${cartId.value}/${itemId}/${sku}`,
+                { quantity }
+            )
+            items.value = response.data.items
+
+            return true
+        } catch (error: any) {
+            console.error('Błąd aktualizacji ilości w koszyku:', error)
+
+            if (error.response?.status === 404) {
+                throw error.response.data
+            }
+
+            throw new Error('Nie udało się zaktualizować ilości')
+        }
+    }
+
+    const removeFromCart = async (itemId: string, sku: string) => {
+        try {
+            const response = await $axios.delete(
+                `/cart/${cartId.value}/${itemId}/${sku}`
+            )
+            items.value = response.data.items
+        } catch (error) {
+            console.error('Błąd usuwania z koszyka:', error)
+        }
+    }
+
+    const clearCart = async (itemId: string, sku: string) => {
+        try {
+            await $axios.delete(`/cart/${cartId.value}`)
+            items.value = []
+        } catch (error) {
+            console.error('Błąd czyszczenia koszyka:', error)
+        }
+    }
+
+    onMounted(() => {
+        cartId.value = getCartId()
+        fetchCart()
     })
 
-    const addToCart = (item: CartItem) => {
-        const existingItem = items.value.find((i) => i.id === item.id)
-        if (existingItem) {
-            existingItem.quantity += item.quantity
-        } else {
-            items.value.push(item)
-        }
+    return {
+        cartId,
+        items,
+        totalItems,
+        totalPrice,
+        fetchCart,
+        addToCart,
+        updateCartItemQuantity,
+        removeFromCart,
+        clearCart,
     }
-
-    const removeFromCart = (itemId: number) => {
-        items.value = items.value.filter((item) => item.id !== itemId)
-    }
-
-    return { items, totalItems, totalPrice, addToCart, removeFromCart }
 })

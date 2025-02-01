@@ -5,5 +5,5 @@ export interface Product {
     category: string
     images: string[]
     price: number
-    quantity: { size: string; stock: number }[]
+    quantity: { size: string; stock: number; sku: string }[]
 }

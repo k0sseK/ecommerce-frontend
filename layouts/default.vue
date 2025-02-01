@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div class="flex flex-col min-h-screen">
         <Toast />
 
         <AppHeader />
-        <slot />
+        <main class="flex-grow">
+            <slot />
+        </main>
         <AppFooter />
     </div>
 </template>

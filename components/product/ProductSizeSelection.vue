@@ -1,17 +1,23 @@
 <script setup lang="ts">
 const props = defineProps({
     quantity: {
-        type: Array as () => Array<{ size: string; stock: number }>,
+        type: Array as () => Array<{
+            size: string
+            stock: number
+            sku: string
+        }>,
         required: true,
     },
 })
 
-const selectedSize = ref<string | null>(null)
+const selectedSize = defineModel<string | null>('selectedSize')
+const selectedSku = defineModel<string | null>('selectedSku')
 
-const selectSize = (size: string) => {
+const selectSize = (size: string, sku: string) => {
     const selectedItem = props.quantity.find((item) => item.size === size)
     if (selectedItem && selectedItem.stock > 0) {
         selectedSize.value = size
+        selectedSku.value = sku
     }
 }
 </script>
@@ -25,7 +31,7 @@ const selectSize = (size: string) => {
             severity="contrast"
             class="w-11 h-11"
             :disabled="item.stock === 0"
-            @click="selectSize(item.size)"
+            @click="selectSize(item.size, item.sku)"
         />
     </div>
 </template>

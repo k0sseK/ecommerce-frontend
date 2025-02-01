@@ -5,7 +5,13 @@ export default defineNuxtConfig({
     devtools: { enabled: false },
     ssr: true,
 
-    modules: ['@pinia/nuxt', '@primevue/nuxt-module', '@nuxtjs/i18n'],
+    modules: [
+        '@pinia/nuxt',
+        '@primevue/nuxt-module',
+        '@nuxtjs/i18n',
+        'nuxt-lodash',
+    ],
+
     css: ['~/assets/css/tailwind.css', '~/assets/scss/main.scss'],
 
     runtimeConfig: {

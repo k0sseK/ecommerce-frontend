@@ -1,22 +1,25 @@
 <script setup lang="ts">
+import { useCartStore } from '@/stores/cart'
 import { useProductStore } from '@/stores/product'
+
 import type { Product } from '@/types/product'
 
+const { t } = useI18n()
+
+const toast = useToast()
 const route = useRoute()
 const productStore = useProductStore()
+const cartStore = useCartStore()
 
 const { fetchProductById } = productStore
-
-// toast.add({
-//     severity: 'secondary',
-//     summary: props.name,
-//     detail: t('product_size_out_of_stock'),
-//     life: 2500,
-// })
+const { addToCart } = cartStore
 
 const productId = route.params.id
 const product = ref<Product | null>(null)
 const loading = ref<boolean>(true)
+
+const selectedSize = ref<string | null>(null)
+const selectedSku = ref<string | null>(null)
 
 const selectedImage = ref<number>(0)
 
@@ -60,6 +63,30 @@ const observeImages = () => {
     imageRefs.value.forEach((image) => {
         if (image && observer) observer.observe(image)
     })
+}
+
+const handleAddToCart = async (product: Product) => {
+    if (selectedSize.value && selectedSku.value) {
+        await addToCart({
+            productId: product._id,
+            name: product.name,
+            size: selectedSize.value,
+            sku: selectedSku.value,
+            image: product.images[0],
+            price: product.price,
+            quantity: 1,
+        })
+
+        toast.add({
+            severity: 'secondary',
+            summary: product.name,
+            detail: t('product_added_to_cart'),
+            life: 2500,
+        })
+
+        selectedSize.value = null
+        selectedSku.value = null
+    }
 }
 
 onMounted(async () => {
@@ -134,6 +161,8 @@ onBeforeUnmount(() => {
                                 <ProductSizeSelection
                                     class="my-5"
                                     :quantity="product.quantity"
+                                    v-model:selectedSize="selectedSize"
+                                    v-model:selectedSku="selectedSku"
                                 />
                                 <Divider />
 
@@ -144,8 +173,10 @@ onBeforeUnmount(() => {
 
                                     <Button
                                         :label="$t('add_to_cart')"
+                                        :disabled="!selectedSize"
                                         severity="secondary"
                                         class="w-full py-3"
+                                        @click="handleAddToCart(product)"
                                     />
                                 </div>
                             </div>

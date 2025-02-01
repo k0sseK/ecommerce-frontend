@@ -2,18 +2,72 @@
 import { useCartStore } from '@/stores/cart'
 import { storeToRefs } from 'pinia'
 
+const toast = useToast()
 const cartStore = useCartStore()
 
 const { items, totalItems, totalPrice } = storeToRefs(cartStore)
-const { removeFromCart } = cartStore
+const { updateCartItemQuantity, removeFromCart } = cartStore
 
 const couponCode = ref<string | null>(null)
+const previousQuantities = ref<Record<string, number>>({})
 
-const navigateToProduct = (productId: number) => {
+const navigateToProduct = (productId: string) => {
     navigateTo({
         name: 'product-id',
         params: { id: productId },
     })
+}
+
+const debouncedUpdateCartItemQuantity = useDebounce(
+    async (productId: string, sku: string, quantity: number) => {
+        try {
+            await updateCartItemQuantity(productId, sku, quantity)
+        } catch (error: any) {
+            if (error?.availableStock === 0) {
+                toast.add({
+                    severity: 'warn',
+                    summary: 'Błąd koszyka',
+                    detail: 'Produkt został wyprzedany i usunięty!',
+                    life: 3000,
+                })
+
+                items.value = items.value.filter((item) => item.sku !== sku)
+            } else if (error?.availableStock) {
+                toast.add({
+                    severity: 'error',
+                    summary: 'Błąd koszyka',
+                    detail: `Dostępna ilość to ${error.availableStock}!`,
+                    life: 3000,
+                })
+
+                items.value = items.value.map((item) =>
+                    item.productId === productId && item.sku === sku
+                        ? {
+                              ...item,
+                              quantity: error.availableStock,
+                          }
+                        : item
+                )
+            } else {
+                console.error(error.message)
+            }
+        }
+    },
+    500
+)
+
+const handleUpdateQuantity = (
+    productId: string,
+    sku: string,
+    newQuantity: number
+) => {
+    const key = `${productId}-${sku}`
+    const prevQuantity = previousQuantities.value[key] ?? 0
+
+    if (newQuantity !== prevQuantity) {
+        previousQuantities.value[key] = newQuantity
+        debouncedUpdateCartItemQuantity(productId, sku, newQuantity)
+    }
 }
 </script>
 
@@ -27,14 +81,14 @@ const navigateToProduct = (productId: number) => {
                     <div v-if="totalItems > 0" class="flex flex-col gap-4">
                         <div
                             v-for="item in items"
-                            :key="item.id"
+                            :key="item.productId"
                             class="flex flex-row gap-4"
                         >
                             <img :src="item.image" class="w-28" />
                             <div class="flex flex-col gap-2 w-full">
                                 <h1
                                     class="uppercase cursor-pointer hover:underline"
-                                    @click="navigateToProduct(item.id)"
+                                    @click="navigateToProduct(item.productId)"
                                 >
                                     {{ item.name }}
                                 </h1>
@@ -64,6 +118,18 @@ const navigateToProduct = (productId: number) => {
                                         :min="1"
                                         :max="99"
                                         size="small"
+                                        @focus="
+                                            previousQuantities[
+                                                `${item.productId}-${item.sku}`
+                                            ] = item.quantity
+                                        "
+                                        @update:modelValue="
+                                            handleUpdateQuantity(
+                                                item.productId,
+                                                item.sku,
+                                                $event
+                                            )
+                                        "
                                     >
                                         <template #incrementbuttonicon>
                                             <span class="pi pi-plus" />
@@ -75,7 +141,12 @@ const navigateToProduct = (productId: number) => {
 
                                     <span
                                         class="text-xs items-end cursor-pointer hover:underline"
-                                        @click="removeFromCart(item.id)"
+                                        @click="
+                                            removeFromCart(
+                                                item.productId,
+                                                item.sku
+                                            )
+                                        "
                                     >
                                         {{ $t('cart_remove') }}
                                     </span>
