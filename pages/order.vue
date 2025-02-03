@@ -1,39 +1,37 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/cart'
 import { storeToRefs } from 'pinia'
-import type { OrderDeliveryMethod } from '@/types/order'
+import { deliveryMethods } from '@/config/deliveryMethods'
 
 const cartStore = useCartStore()
-
 const { items, totalItems, totalPrice } = storeToRefs(cartStore)
 
-const deliveryMethods = ref<OrderDeliveryMethod[]>([
-    {
-        name: 'InPost Kurier',
-        value: 'inpost_courier',
-        price: 14.99,
-    },
-    {
-        name: 'InPost Paczkomaty',
-        value: 'inpost_parcel_lockers',
-        price: 11.99,
-    },
-])
-const selectedDeliveryMethod = ref<string>(deliveryMethods.value[0].value)
-
+const selectedDeliveryMethod = ref<string>(deliveryMethods[0].value)
 const getDeliveryPrice = computed(() => {
     return (
-        deliveryMethods.value.find(
+        deliveryMethods.find(
             (method) => method.value === selectedDeliveryMethod.value
         )?.price || 0
     )
 })
 
-const navigateToProduct = (productId: number) => {
+const navigateToProduct = (productId: string) => {
     navigateTo({
         name: 'product-id',
         params: { id: productId },
     })
+}
+
+const handlePayment = async () => {
+    // Handle payment logic
+    const { $axios } = useNuxtApp()
+
+    try {
+        const response = await $axios.get('/stripe/test')
+        console.log(response)
+    } catch (err) {
+        console.error(err)
+    }
 }
 </script>
 
@@ -144,7 +142,9 @@ const navigateToProduct = (productId: number) => {
                         </div>
 
                         <div class="col-span-6 lg:col-span-6">
-                            <OrderDeliveryMethod />
+                            <OrderDeliveryMethod
+                                :selectedDeliveryMethod="selectedDeliveryMethod"
+                            />
                         </div>
                     </div>
                 </div>
@@ -162,14 +162,16 @@ const navigateToProduct = (productId: number) => {
                         <div v-if="totalItems > 0" class="flex flex-col gap-4">
                             <div
                                 v-for="item in items"
-                                :key="item.id"
+                                :key="item.productId"
                                 class="flex flex-row gap-4"
                             >
                                 <img :src="item.image" class="w-14" />
                                 <div class="flex flex-col gap-2 w-full">
                                     <h1
                                         class="uppercase cursor-pointer hover:underline"
-                                        @click="navigateToProduct(item.id)"
+                                        @click="
+                                            navigateToProduct(item.productId)
+                                        "
                                     >
                                         {{ item.name }}
                                     </h1>
@@ -254,7 +256,8 @@ const navigateToProduct = (productId: number) => {
                     <Button
                         severity="secondary"
                         class="w-full mt-1"
-                        :label="$t('order_pay')"
+                        :label="$t('order_place_order')"
+                        @click="handlePayment"
                     />
                 </div>
             </div>

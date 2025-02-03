@@ -35,7 +35,7 @@
     "order_total": "Total",
     "order_tax_included": "(tax incl.)",
     "order_payment_method": "Payment Method",
-    "order_pay": "Place order",
+    "order_place_order": "Place order",
 
     "order_form_email": "E-mail",
     "order_form_firstname": "First Name",

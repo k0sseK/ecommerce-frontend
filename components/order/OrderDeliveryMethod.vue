@@ -1,19 +1,8 @@
 <script setup lang="ts">
-import type { OrderDeliveryMethod } from '@/types/order'
+import { deliveryMethods } from '@/config/deliveryMethods'
 
-const methods = ref<OrderDeliveryMethod[]>([
-    {
-        name: 'InPost Kurier',
-        value: 'inpost_courier',
-        price: 14.99,
-    },
-    {
-        name: 'InPost Paczkomaty',
-        value: 'inpost_parcel_lockers',
-        price: 11.99,
-    },
-])
-const selectedMethod = ref<string>(methods.value[0].value)
+const methods = deliveryMethods
+const selectedMethod = defineModel<string>('selectedDeliveryMethod')
 </script>
 
 <template>

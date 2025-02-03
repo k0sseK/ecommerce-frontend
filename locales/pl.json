@@ -36,7 +36,7 @@
     "order_total": "Suma",
     "order_tax_included": "(w tym podatek)",
     "order_payment_method": "Metoda płatności",
-    "order_pay": "Zapłać",
+    "order_place_order": "Złóż zamówienie",
     "order_form_email": "E-mail",
     "order_form_firstname": "Imię",
     "order_form_lastname": "Nazwisko",
