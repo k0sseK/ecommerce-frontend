@@ -1,10 +1,28 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/cart'
 import { storeToRefs } from 'pinia'
+import { loadStripe } from '@stripe/stripe-js'
 import { deliveryMethods } from '@/config/deliveryMethods'
 
 const cartStore = useCartStore()
 const { items, totalItems, totalPrice } = storeToRefs(cartStore)
+
+const loading = ref<boolean>(false)
+
+const orderData = ref({
+    contactEmail: 'user@example.com',
+    firstName: 'Jan',
+    lastName: 'Kowalski',
+    address: 'ul. Przykładowa 10',
+    postalCode: '00-000',
+    city: 'Warszawa',
+    phone: '123456789',
+    shippingMethod: 'inpost_courier',
+    parcelLocker: null,
+    paymentMethod: 'blik',
+    shippingPrice: 10.0,
+    cartId: getCartId(),
+})
 
 const selectedDeliveryMethod = ref<string>(deliveryMethods[0].value)
 const getDeliveryPrice = computed(() => {
@@ -22,15 +40,32 @@ const navigateToProduct = (productId: string) => {
     })
 }
 
-const handlePayment = async () => {
-    // Handle payment logic
+const placeOrder = async () => {
     const { $axios } = useNuxtApp()
 
+    loading.value = true
     try {
-        const response = await $axios.get('/stripe/test')
-        console.log(response)
-    } catch (err) {
-        console.error(err)
+        const response = await $axios.post('orders', orderData.value)
+        const { order, sessionId } = response.data
+
+        console.log('Utworzono zamówienie:', order)
+
+        const stripe = await loadStripe(
+            'pk_test_51QoRVjAc9oXjMlaqKN7xEDxENYnNCaukIOKBxVkpJvLYSjEWVeXhR0COtNVBWO738REfRtmYqEiWhWgaXfa9NXcI00zsDq1Oy2'
+        )
+
+        console.log(sessionId)
+        const result = await stripe?.redirectToCheckout({ sessionId })
+
+        if (result?.error) {
+            console.error('Błąd płatności:', result.error.message)
+            alert('Wystąpił błąd podczas płatności.')
+        }
+    } catch (error) {
+        console.error('Błąd zamówienia:', error)
+        alert('Nie udało się złożyć zamówienia.')
+    } finally {
+        loading.value = false
     }
 }
 </script>
@@ -134,17 +169,14 @@ const handlePayment = async () => {
                             </div>
                         </div>
 
-                        <div>
-                            <span class="text-2xl font-medium">
-                                {{ $t('order_delivery_method') }}
-                            </span>
-                            <Divider class="my-0" />
-                        </div>
-
                         <div class="col-span-6 lg:col-span-6">
                             <OrderDeliveryMethod
                                 :selectedDeliveryMethod="selectedDeliveryMethod"
                             />
+                        </div>
+
+                        <div class="col-span-6 lg:col-span-6">
+                            <OrderPaymentMethod />
                         </div>
                     </div>
                 </div>
@@ -206,7 +238,11 @@ const handlePayment = async () => {
                                 >
                                     <span>{{ $t('order_subtotal') }}</span>
                                     <span>
-                                        {{ `${totalPrice} ${$t('currency')}` }}
+                                        {{
+                                            `${totalPrice.toFixed(2)} ${$t(
+                                                'currency'
+                                            )}`
+                                        }}
                                     </span>
                                 </div>
 
@@ -242,22 +278,13 @@ const handlePayment = async () => {
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="border border-light-gray rounded-md p-4">
-                    <div>
-                        <span class="text-2xl font-medium">
-                            {{ $t('order_payment_method') }}
-                        </span>
-                        <Divider class="mt-0" />
-                    </div>
-
-                    <OrderPaymentMethod />
                     <Button
                         severity="secondary"
-                        class="w-full mt-1"
+                        class="w-full mt-5"
                         :label="$t('order_place_order')"
-                        @click="handlePayment"
+                        :loading="loading"
+                        @click="placeOrder"
                     />
                 </div>
             </div>

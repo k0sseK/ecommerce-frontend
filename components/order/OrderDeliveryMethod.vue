@@ -7,6 +7,13 @@ const selectedMethod = defineModel<string>('selectedDeliveryMethod')
 
 <template>
     <div>
+        <div>
+            <span class="text-2xl font-medium">
+                {{ $t('order_delivery_method') }}
+            </span>
+            <Divider class="mt-0" />
+        </div>
+
         <div
             v-for="method in methods"
             :key="method.value"

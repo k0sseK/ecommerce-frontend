@@ -15,30 +15,35 @@ const selectedMethod = ref(methods.value[0].value)
 <template>
     <div>
         <div>
-            <div
-                v-for="method in methods"
-                :key="method.value"
-                class="w-full lg:w-1/2"
-            >
-                <div class="flex flex-row items-center justify-between">
-                    <div class="flex flex-row items-center gap-2">
-                        <RadioButton
-                            v-model="selectedMethod"
-                            :inputId="method.value"
-                            :value="method.value"
-                            name="dynamic"
-                            size="small"
-                        />
-                        <label :for="method.value" class="cursor-pointer">
-                            {{ method.name }}
-                        </label>
-                    </div>
-                    <div>
-                        <!-- <span>
-                            {{ method.price }}
-                            {{ $t('currency') }}
-                        </span> -->
-                    </div>
+            <span class="text-2xl font-medium">
+                {{ $t('order_payment_method') }}
+            </span>
+            <Divider class="mt-0" />
+        </div>
+
+        <div
+            v-for="method in methods"
+            :key="method.value"
+            class="w-full lg:w-1/2"
+        >
+            <div class="flex flex-row items-center justify-between">
+                <div class="flex flex-row items-center gap-2">
+                    <RadioButton
+                        v-model="selectedMethod"
+                        :inputId="method.value"
+                        :value="method.value"
+                        name="dynamic"
+                        size="small"
+                    />
+                    <label :for="method.value" class="cursor-pointer">
+                        {{ method.name }}
+                    </label>
+                </div>
+                <div>
+                    <!-- <span>
+                        {{ method.price }}
+                        {{ $t('currency') }}
+                    </span> -->
                 </div>
             </div>
         </div>

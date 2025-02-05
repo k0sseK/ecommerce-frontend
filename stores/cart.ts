@@ -8,13 +8,13 @@ export const useCartStore = defineStore('cart', () => {
     const items = ref<CartItem[]>([])
 
     const totalItems = computed(() => items.value.length)
-    const totalPrice = computed(() =>
-        parseFloat(
+    const totalPrice = computed(() => {
+        return Number(
             items.value
                 .reduce((total, item) => total + item.price * item.quantity, 0)
                 .toFixed(2)
         )
-    )
+    })
 
     const fetchCart = async () => {
         if (!cartId.value) return
