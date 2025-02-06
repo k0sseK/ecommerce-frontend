@@ -27,6 +27,7 @@
     "cart_check_out": "Zobacz koszyk",
     "cart_order": "Przejdź do płatności",
 
+    "order": "Zamówienie",
     "order_contact": "Kontakt",
     "order_delivery": "Dostawa",
     "order_delivery_method": "Metoda wysyłki",
@@ -38,6 +39,7 @@
     "order_payment_method": "Metoda płatności",
     "order_place_order": "Złóż zamówienie",
     "order_form_email": "E-mail",
+    "order_form_email_invalid": "Nieprawidłowy adres e-mail",
     "order_form_firstname": "Imię",
     "order_form_lastname": "Nazwisko",
     "order_form_address": "Adres",
@@ -45,6 +47,9 @@
     "order_form_city": "Miasto",
     "order_form_phone_number": "Numer telefonu",
     "order_form_phone_number_tooltip": "Na wypadek potrzeby kontaktu w sprawie Twojego zamówienia",
+    "order_field_is_required": "Pole jest wymagane.",
+    "order_fill_required_fields": "Wypełnij wymagane pola.",
+    "order_failed": "Nie udało się złożyć zamówienia.",
 
     "new_arrivals": "Nowości",
     "view_all": "Zobacz wszystko",

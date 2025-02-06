@@ -31,7 +31,7 @@
 
         <div>
             <img
-                src="/assets/png/bg.png"
+                src="/assets/img/bg.png"
                 class="object-cover w-full h-[52rem]"
             />
         </div>

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { CartItem } from '~/types/cart'
+import type { CartItem } from '@/types/cart'
 
 export const useCartStore = defineStore('cart', () => {
     const { $axios } = useNuxtApp()

@@ -36,8 +36,8 @@
     "order_tax_included": "(tax incl.)",
     "order_payment_method": "Payment Method",
     "order_place_order": "Place order",
-
     "order_form_email": "E-mail",
+    "order_form_email_invalid": "Invalid e-mail address",
     "order_form_firstname": "First Name",
     "order_form_lastname": "Last Name",
     "order_form_address": "Address",
@@ -45,6 +45,9 @@
     "order_form_city": "City",
     "order_form_phone_number": "Phone Number",
     "order_form_phone_number_tooltip": "In case you contact us regarding your order",
+    "order_field_is_required": "Filed is required.",
+    "order_fill_required_fields": "Fill in the required fields.",
+    "order_failed": "Order failed.",
 
     "new_arrivals": "New Arrivals",
     "view_all": "View all",
