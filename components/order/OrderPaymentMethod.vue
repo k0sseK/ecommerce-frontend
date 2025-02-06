@@ -1,15 +1,11 @@
 <script setup lang="ts">
 const methods = ref([
     {
-        name: 'BLIK',
-        value: 'blik',
-    },
-    {
-        name: 'Przelew bankowy',
-        value: 'bank_transfer',
+        name: 'Stripe (BLIK, Karta, Przelewy24)',
+        value: 'stripe',
     },
 ])
-const selectedMethod = ref(methods.value[0].value)
+const selectedMethod = defineModel<string>('selectedPaymentMethod')
 </script>
 
 <template>
@@ -21,11 +17,7 @@ const selectedMethod = ref(methods.value[0].value)
             <Divider class="mt-0" />
         </div>
 
-        <div
-            v-for="method in methods"
-            :key="method.value"
-            class="w-full lg:w-1/2"
-        >
+        <div v-for="method in methods" :key="method.value" class="w-full">
             <div class="flex flex-row items-center justify-between">
                 <div class="flex flex-row items-center gap-2">
                     <RadioButton
@@ -39,11 +31,27 @@ const selectedMethod = ref(methods.value[0].value)
                         {{ method.name }}
                     </label>
                 </div>
-                <div>
-                    <!-- <span>
-                        {{ method.price }}
-                        {{ $t('currency') }}
-                    </span> -->
+                <div class="flex flex-row items-center">
+                    <img
+                        src="/assets/img/blik.png"
+                        alt="payment_method_blik"
+                        class="rounded-sm"
+                    />
+                    <img
+                        src="/assets/img/mastercard.png"
+                        alt="payment_method_card_mastercard"
+                        class="rounded-sm"
+                    />
+                    <img
+                        src="/assets/img/visa.png"
+                        alt="payment_method_card_visa"
+                        class="rounded-sm"
+                    />
+                    <img
+                        src="/assets/img/p24.png"
+                        alt="payment_method_p24"
+                        class="rounded-sm ml-2"
+                    />
                 </div>
             </div>
         </div>

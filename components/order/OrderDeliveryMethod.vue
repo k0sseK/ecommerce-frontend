@@ -14,11 +14,7 @@ const selectedMethod = defineModel<string>('selectedDeliveryMethod')
             <Divider class="mt-0" />
         </div>
 
-        <div
-            v-for="method in methods"
-            :key="method.value"
-            class="w-full lg:w-1/2"
-        >
+        <div v-for="method in methods" :key="method.value">
             <div class="flex flex-row items-center justify-between">
                 <div class="flex flex-row items-center gap-2">
                     <RadioButton
@@ -32,11 +28,16 @@ const selectedMethod = defineModel<string>('selectedDeliveryMethod')
                         {{ method.name }}
                     </label>
                 </div>
-                <div>
+                <div class="flex flex-row items-center gap-2">
                     <span>
                         {{ method.price }}
                         {{ $t('currency') }}
                     </span>
+                    <img
+                        :src="`/img/svg/${method.value}.svg`"
+                        :alt="`delivery_method_${method.value}`"
+                        class="rounded-sm w-7"
+                    />
                 </div>
             </div>
             <Button
@@ -44,8 +45,8 @@ const selectedMethod = defineModel<string>('selectedDeliveryMethod')
                 class="w-full mt-1"
                 severity="secondary"
                 v-if="
-                    method.value === 'inpost_parcel_lockers' &&
-                    selectedMethod === 'inpost_parcel_lockers'
+                    method.value === 'inpost_parcel_locker' &&
+                    selectedMethod === 'inpost_parcel_locker'
                 "
             />
         </div>
