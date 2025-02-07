@@ -26,8 +26,10 @@
                 </h1>
             </div>
             <div class="w-20 flex flex-row items-center gap-3">
-                <LanguageSelector />
-                <CartDrawer />
+                <template v-if="$route.name !== 'order-success'">
+                    <LanguageSelector />
+                    <CartDrawer />
+                </template>
             </div>
         </div>
     </header>

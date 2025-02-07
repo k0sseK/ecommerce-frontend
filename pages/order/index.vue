@@ -70,6 +70,7 @@ const resolver = ({ values }: { values: OrderForm }) => {
 }
 
 const onFormSubmit = async ({ valid }: { valid: boolean }) => {
+    console.log(window.location.origin)
     if (valid) {
         loading.value = true
 
@@ -77,9 +78,13 @@ const onFormSubmit = async ({ valid }: { valid: boolean }) => {
             const orderData = {
                 ...initialValues,
                 cartId: getCartId(),
+
                 shippingMethod: selectedDeliveryMethod.value,
                 shippingPrice: getDeliveryPrice.value,
                 paymentMethod: 'stripe',
+
+                successUrl: `${window.location.origin}/order/success`,
+                cancelUrl: `${window.location.origin}/shop/all`,
             }
 
             const { sessionId } = await placeOrder(orderData)

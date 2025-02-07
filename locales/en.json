@@ -48,6 +48,8 @@
     "order_field_is_required": "Filed is required.",
     "order_fill_required_fields": "Fill in the required fields.",
     "order_failed": "Order failed.",
+    "order_payment_complete": "Order completed",
+    "order_payment_complete_description": "Order has been placed successfully. Thank you!",
 
     "new_arrivals": "New Arrivals",
     "view_all": "View all",

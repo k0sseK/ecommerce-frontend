@@ -50,6 +50,8 @@
     "order_field_is_required": "Pole jest wymagane.",
     "order_fill_required_fields": "Wypełnij wymagane pola.",
     "order_failed": "Nie udało się złożyć zamówienia.",
+    "order_payment_complete": "Płatność zrealizowana",
+    "order_payment_complete_description": "Pomyślnie złożono zamówienie. Dziękujemy!",
 
     "new_arrivals": "Nowości",
     "view_all": "Zobacz wszystko",

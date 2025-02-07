@@ -6,6 +6,6 @@
         <main class="flex-grow">
             <slot />
         </main>
-        <AppFooter />
+        <AppFooter v-if="$route.name !== 'order-success'" />
     </div>
 </template>

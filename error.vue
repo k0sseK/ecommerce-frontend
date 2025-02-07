@@ -9,6 +9,7 @@
         <Button
             :label="$t('back_to_home')"
             severity="secondary"
+            class="px-10"
             @click="navigateTo('/')"
         />
     </div>
